@@ -27,9 +27,9 @@ Project is under active development.
 - [ ] 
 ## Screenshots
 
-![Main Window](screenshots/main-window.png)
+![Main Window](screenshots/main_Window.png)
 
-![Package Search](screenshots/search.png)
+![Package Search](screenshots/Search.png)
 
 
 ## License

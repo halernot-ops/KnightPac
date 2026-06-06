@@ -24,6 +24,13 @@ Project is under active development.
 - [ ] Better package details
 - [ ] Theme polishing
 - [ ] Release 0.5
+- [ ] 
+## Screenshots
+
+![Main Window](screenshots/main-window.png)
+
+![Package Search](screenshots/search.png)
+
 
 ## License
 

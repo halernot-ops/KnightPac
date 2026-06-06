@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=KnightPac
+Comment=Graphical package manager for Linux
+Exec=knightpac
+Icon=knightpac
+Terminal=false
+Categories=System;PackageManager;
+Keywords=package;pacman;aur;flatpak;
+StartupWMClass=KnightPac

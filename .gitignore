@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.pyc
+knightpac/logs/*.log
+knightpac/logs/*.log.*
+knightpac/logs/exports/
+knightpac/data/history.db
+!knightpac/logs/.gitkeep
+!knightpac/data/.gitkeep

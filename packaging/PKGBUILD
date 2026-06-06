@@ -1,0 +1,31 @@
+# Maintainer: KnightPac Contributors
+pkgname=knightpac
+pkgver=0.3.0
+pkgrel=1
+pkgdesc="Graphical package manager for Linux (pacman, paru, flatpak)"
+arch=('any')
+url="https://github.com/example/knightpac"
+license=('MIT')
+depends=(
+  'python>=3.12'
+  'python-pyside6'
+  'python-qasync'
+  'pacman'
+  'polkit'
+)
+optdepends=(
+  'paru: AUR support'
+  'flatpak: Flatpak support'
+)
+makedepends=('python-build' 'python-installer' 'python-setuptools')
+source=("$pkgname-$pkgver.tar.gz")
+sha256sums=('SKIP')
+
+package() {
+  cd "$pkgname-$pkgver"
+  python -m build --wheel
+  pip install --root="$pkgdir" --no-deps dist/*.whl
+  install -Dm644 packaging/knightpac.desktop "$pkgdir/usr/share/applications/knightpac.desktop"
+  install -Dm644 packaging/icons/hicolor/256x256/apps/knightpac.png \
+    "$pkgdir/usr/share/icons/hicolor/256x256/apps/knightpac.png"
+}

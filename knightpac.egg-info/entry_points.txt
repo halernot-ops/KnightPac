@@ -1,0 +1,2 @@
+[console_scripts]
+knightpac = knightpac.main:main

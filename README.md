@@ -1,0 +1,108 @@
+# KnightPac
+
+Cross-platform graphical package manager (0.3).
+
+## Features
+
+- Search (cached, relevance-ranked), install, remove, and reinstall packages
+- Pacman, Paru, and Flatpak backends via plugin registry
+- Sequential operation queue with progress and cancel
+- System tray, desktop notifications, log rotation
+- History filters and CSV/JSON export
+- System diagnostics page
+- Dependency tree, files list, changelog
+- Repository and AUR updates
+- Terminal log with copy, search, and save
+- Operation history (SQLite)
+- Cache cleaner
+- Privileged operations via `pkexec` (GUI never runs as root)
+
+## Requirements
+
+- Python 3.12+
+- Arch Linux (or derivative) with `pacman`
+- Optional: `paru` for AUR
+- `pkexec` (polkit) for install/remove/sync
+
+## Install
+
+```bash
+cd /mnt/hdd/pacmanGui
+python -m venv .venv
+```
+
+**bash / zsh:**
+
+```bash
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+**fish** (do not use `activate` — it is a bash script):
+
+```fish
+cd /mnt/hdd/pacmanGui
+source .venv/bin/activate.fish
+python -m pip install -r requirements.txt
+```
+
+Verify the venv is active:
+
+```fish
+which python
+# → /mnt/hdd/pacmanGui/.venv/bin/python
+
+python -m pip show PySide6
+```
+
+If you see `ModuleNotFoundError: No module named 'PySide6'`, the venv was not activated (often after running `source .venv/bin/activate` in fish).
+
+## Run
+
+**bash / zsh:**
+
+```bash
+PYTHONPATH=. python knightpac/main.py
+```
+
+**fish:**
+
+```fish
+PYTHONPATH=. python knightpac/main.py
+```
+
+Or after install:
+
+```bash
+knightpac
+```
+
+## Packaging (manual)
+
+- `packaging/PKGBUILD` — Arch Linux package template
+- `packaging/knightpac.desktop` — desktop entry
+- `packaging/appimage/` — AppImage notes
+- `packaging/flatpak/` — Flatpak manifest template
+- `pyproject.toml` — Python package metadata
+
+## Architecture
+
+```text
+GUI → PackageService → PackageManagerRegistry → plugins (pacman, paru, …)
+                              ↓
+                    OperationQueue (sequential)
+                              ↓
+                    ProcessRunner → TerminalBuffer
+                    HistoryRepository (SQLite)
+                    SettingsService (QSettings)
+```
+
+All package manager commands run asynchronously through `QProcess`. The GUI never imports concrete backends; plugins register via `backend/registry.py` autodiscovery.
+
+## Project layout
+
+See specification in project docs — `knightpac/ui/`, `knightpac/backend/`, `knightpac/services/`, `knightpac/models/`.
+
+## License
+
+MIT (add your license as needed)
